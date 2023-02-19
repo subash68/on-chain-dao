@@ -1,5 +1,6 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { DeployFunction } from "hardhat-deploy/types";
+import { ethers } from "hardhat";
 import {
   QUORUM_PERCENTAGE,
   VOTING_DELAY,
@@ -18,8 +19,17 @@ const deployGovernorContract: DeployFunction = async function (
 
   const { deployer } = await getNamedAccounts();
 
-  const governanceToken = await get("Governance721Token");
-  const timeLock = await get("TimeLock");
+  //   const governanceToken = await get("Governance721Token");
+  //   const timeLock = await get("TimeLock");
+
+  const governanceToken = await ethers.getContractAt(
+    "Governance721Token",
+    "0x6568c21C3Ee8e48A2b65100473D4Ede445C59290"
+  );
+  const timeLock = await ethers.getContractAt(
+    "TimeLock",
+    "0x2DACA61cF684110BA8C5F8914B3995BEE8d196B5"
+  );
 
   log(`\t Deploying governor contract ... `);
   const governorContract = await deploy("GovernorContract", {

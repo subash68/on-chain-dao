@@ -26,7 +26,10 @@ const deployBox: DeployFunction = async function (
     await verify(box.address, []);
   }
 
-  const timeLock = await ethers.getContract("TimeLock");
+  const timeLock = await ethers.getContractAt(
+    "TimeLock",
+    "0x2DACA61cF684110BA8C5F8914B3995BEE8d196B5"
+  );
   const boxContract = await ethers.getContractAt("Box", box.address);
   const transferOwnerTx = await boxContract.transferOwnership(timeLock.address);
   await transferOwnerTx.wait(1);
