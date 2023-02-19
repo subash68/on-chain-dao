@@ -39,3 +39,4 @@ const setupGovernance: DeployFunction = async function (
 };
 
 export default setupGovernance;
+setupGovernance.tags = ["all", "governorsetup"];
